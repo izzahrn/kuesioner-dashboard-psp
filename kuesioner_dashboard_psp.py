@@ -182,3 +182,26 @@ if st.button("Kirim Kuesioner"):
         df.to_csv(file_name, index=False)
 
     st.success("Terima kasih 🙏 Kuesioner berhasil dikirim.")
+
+
+# =====================
+# ADMIN – DOWNLOAD HASIL
+# =====================
+st.divider()
+st.subheader("Admin – Unduh Hasil Kuesioner")
+
+file_name = "hasil_kuesioner_dashboard_psp.csv"
+
+if os.path.exists(file_name):
+    df_download = pd.read_csv(file_name)
+
+    st.write(f"Jumlah responden: **{len(df_download)}**")
+
+    st.download_button(
+        label="⬇️ Download Hasil Kuesioner (CSV)",
+        data=df_download.to_csv(index=False),
+        file_name="hasil_kuesioner_dashboard_psp.csv",
+        mime="text/csv"
+    )
+else:
+    st.info("Belum ada data kuesioner yang masuk.")
